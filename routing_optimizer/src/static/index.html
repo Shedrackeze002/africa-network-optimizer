@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Africa Network Infrastructure Optimizer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .section h2 {
+            color: #34495e;
+            margin-top: 0;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        .recommendation {
+            background-color: #e8f5e8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #27ae60;
+        }
+        .high-priority {
+            border-left-color: #e74c3c;
+            background-color: #fdf2f2;
+        }
+        .medium-priority {
+            border-left-color: #f39c12;
+            background-color: #fef9e7;
+        }
+        .loading {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .metric {
+            display: inline-block;
+            margin: 10px 15px;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .metric-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Africa Network Infrastructure Optimizer</h1>
+        <p style="text-align: center; color: #7f8c8d; font-size: 18px;">
+            Analyzing and optimizing network infrastructure for improved connectivity across Africa
+        </p>
+
+        <div class="section">
+            <h2>📊 Network Analysis</h2>
+            <p>Analyze current network performance and identify bottlenecks based on traceroute data.</p>
+            <button onclick="analyzeNetwork()">Run Network Analysis</button>
+            <div id="analysisResults" class="results" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Infrastructure Recommendations</h2>
+            <p>Get prioritized recommendations for infrastructure improvements.</p>
+            <button onclick="getRecommendations()">Get Recommendations</button>
+            <div id="recommendationsResults" class="results" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h2>⚡ Optimization Simulation</h2>
+            <p>Simulate the impact of proposed infrastructure changes.</p>
+            <button onclick="simulateOptimizations()">Simulate Improvements</button>
+            <div id="simulationResults" class="results" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        async function analyzeNetwork() {
+            const resultsDiv = document.getElementById('analysisResults');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = '<div class="loading">Analyzing network data...</div>';
+
+            try {
+                const response = await fetch('/api/analyze');
+                const data = await response.json();
+
+                let html = '<h3>Network Analysis Results</h3>';
+                
+                // Metrics
+                html += '<div>';
+                html += `<div class="metric">
+                    <div class="metric-value">${data.total_hops_analyzed}</div>
+                    <div class="metric-label">Total Hops Analyzed</div>
+                </div>`;
+                html += `<div class="metric">
+                    <div class="metric-value">${data.top_country_pairs.length}</div>
+                    <div class="metric-label">Country Pairs</div>
+                </div>`;
+                html += '</div>';
+
+                // Top traffic pairs
+                html += '<h4>Top Traffic Country Pairs</h4><ul>';
+                data.top_country_pairs.slice(0, 5).forEach(pair => {
+                    html += `<li><strong>${pair[0][0]} ↔ ${pair[0][1]}</strong>: ${pair[1]} routes</li>`;
+                });
+                html += '</ul>';
+
+                // High RTT countries
+                html += '<h4>Countries with Highest Average RTT</h4><ul>';
+                data.high_rtt_countries.slice(0, 5).forEach(country => {
+                    html += `<li><strong>${country.country}</strong>: ${country.avg_rtt.toFixed(2)} ms (${country.hop_count} hops)</li>`;
+                });
+                html += '</ul>';
+
+                resultsDiv.innerHTML = html;
+            } catch (error) {
+                resultsDiv.innerHTML = '<div style="color: red;">Error analyzing network: ' + error.message + '</div>';
+            }
+        }
+
+        async function getRecommendations() {
+            const resultsDiv = document.getElementById('recommendationsResults');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = '<div class="loading">Generating recommendations...</div>';
+
+            try {
+                const response = await fetch('/api/recommendations');
+                const data = await response.json();
+
+                let html = '<h3>Infrastructure Recommendations</h3>';
+                
+                // Investment summary
+                html += `<div class="metric">
+                    <div class="metric-value">${data.total_estimated_investment}</div>
+                    <div class="metric-label">Total Investment</div>
+                </div>`;
+                html += `<div class="metric">
+                    <div class="metric-value">${data.expected_roi_timeline}</div>
+                    <div class="metric-label">ROI Timeline</div>
+                </div>`;
+
+                // Recommendations
+                data.recommendations.forEach(rec => {
+                    const priorityClass = rec.priority.toLowerCase() + '-priority';
+                    html += `<div class="recommendation ${priorityClass}">
+                        <h4>🎯 ${rec.type} - ${rec.location || rec.route}</h4>
+                        <p><strong>Priority:</strong> ${rec.priority}</p>
+                        <p><strong>Rationale:</strong> ${rec.rationale}</p>
+                        <p><strong>Expected Impact:</strong> ${rec.estimated_impact}</p>
+                        <p><strong>Estimated Cost:</strong> ${rec.estimated_cost}</p>
+                    </div>`;
+                });
+
+                // Social impact
+                html += '<h4>Expected Social Impact</h4><ul>';
+                data.social_impact.forEach(impact => {
+                    html += `<li>${impact}</li>`;
+                });
+                html += '</ul>';
+
+                resultsDiv.innerHTML = html;
+            } catch (error) {
+                resultsDiv.innerHTML = '<div style="color: red;">Error getting recommendations: ' + error.message + '</div>';
+            }
+        }
+
+        async function simulateOptimizations() {
+            const resultsDiv = document.getElementById('simulationResults');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = '<div class="loading">Running optimization simulation...</div>';
+
+            // Simulate some proposed changes
+            const proposedChanges = [
+                {
+                    type: 'new_ixp',
+                    country: 'ZA',
+                    improvement_factor: 0.4,
+                    cost: '$3 million USD'
+                },
+                {
+                    type: 'new_cable',
+                    source_country: 'ZA',
+                    destination_country: 'KE',
+                    new_rtt: 8,
+                    cost: '$75 million USD'
+                }
+            ];
+
+            try {
+                const response = await fetch('/api/optimize', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ changes: proposedChanges })
+                });
+                const data = await response.json();
+
+                let html = '<h3>Optimization Simulation Results</h3>';
+                
+                // Original analysis
+                html += '<h4>Current Network State</h4>';
+                html += `<p>Total Routes: ${data.original_analysis.total_routes}</p>`;
+                html += `<p>Total Hops: ${data.original_analysis.total_hops}</p>`;
+
+                // Proposed improvements
+                html += '<h4>Proposed Infrastructure Changes</h4>';
+                Object.entries(data.proposed_improvements).forEach(([key, improvement]) => {
+                    html += `<div class="recommendation">
+                        <h5>${improvement.type} - ${key}</h5>
+                        <p><strong>Improvement:</strong> ${improvement.improvement}</p>
+                        <p><strong>Estimated Cost:</strong> ${improvement.estimated_cost}</p>
+                    </div>`;
+                });
+
+                // Expected benefits
+                html += '<h4>Expected Benefits</h4><ul>';
+                data.expected_benefits.forEach(benefit => {
+                    html += `<li>${benefit}</li>`;
+                });
+                html += '</ul>';
+
+                resultsDiv.innerHTML = html;
+            } catch (error) {
+                resultsDiv.innerHTML = '<div style="color: red;">Error running simulation: ' + error.message + '</div>';
+            }
+        }
+    </script>
+</body>
+</html>

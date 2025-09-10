@@ -1,0 +1,33 @@
+# Ignore large dataset files (over 100MB)
+hackathon_traceroute.json
+hackathon_traceroutes.csv
+hackathon_traceroutes.json
+hop_data_summary.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.venv/
+
+# Zip and binary
+*.zip
+*.png
+*.pptx
+*.pdf

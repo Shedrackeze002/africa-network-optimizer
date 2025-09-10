@@ -1,0 +1,78 @@
+[
+  {
+    "source_country": "TG",
+    "source_region": "Western Africa",
+    "destination_country": "ZA",
+    "destination_region": "Southern Africa",
+    "hops": [
+      {
+        "hop_ip": "192.168.20.1",
+        "latitude": null,
+        "longitude": null,
+        "country": "Private",
+        "region": "Private",
+        "node_name": "Private Network",
+        "rtt": 0.68,
+        "asn": "24691"
+      },
+      {
+        "hop_ip": "41.207.188.1",
+        "latitude": 6.1287,
+        "longitude": 1.2215,
+        "country": "TG",
+        "region": "Western Africa",
+        "node_name": "Unknown Router",
+        "rtt": 6.752,
+        "asn": "24691"
+      },
+      {
+        "hop_ip": "196.60.8.146",
+        "latitude": -26.2023,
+        "longitude": 28.0436,
+        "country": "ZA",
+        "region": "Southern Africa",
+        "node_name": "NAPAfrica_IX_Johannesburg",
+        "rtt": 168.201,
+        "asn": "11845"
+      },
+      {
+        "hop_ip": "102.39.140.57",
+        "latitude": -33.9258,
+        "longitude": 18.4232,
+        "country": "ZA",
+        "region": "Southern Africa",
+        "node_name": "Unknown Router",
+        "rtt": 172.691,
+        "asn": "11845"
+      }
+    ]
+  },
+  {
+    "source_country": "KE",
+    "source_region": "Eastern Africa",
+    "destination_country": "NG",
+    "destination_region": "Western Africa",
+    "hops": [
+      {
+        "hop_ip": "196.201.212.1",
+        "latitude": -1.2864,
+        "longitude": 36.8172,
+        "country": "KE",
+        "region": "Eastern Africa",
+        "node_name": "Nairobi_IX",
+        "rtt": 2.5,
+        "asn": "12345"
+      },
+      {
+        "hop_ip": "213.154.120.5",
+        "latitude": 6.5244,
+        "longitude": 3.3792,
+        "country": "NG",
+        "region": "Western Africa",
+        "node_name": "Lagos_Internet_Exchange",
+        "rtt": 145.8,
+        "asn": "54321"
+      }
+    ]
+  }
+]
